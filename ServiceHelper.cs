@@ -7,11 +7,9 @@ namespace BleBatterySubscribe;
 
 public static class ServiceHelper
 {
-    private static readonly Guid BatteryLeveluuid = new Guid("00002A19-0000-1000-8000-00805F9B34FB");
-
     public static async IAsyncEnumerable<GattCharacteristic> GetBatteryLevelCharacteristicsAsync(GattDeviceService batteryService)
     {
-        var result = await batteryService.GetCharacteristicsForUuidAsync(BatteryLeveluuid);
+        var result = await batteryService.GetCharacteristicsForUuidAsync(GattCharacteristicUuids.BatteryLevel);
         if (result != null)
         {
             foreach (var characteristic in result.Characteristics)

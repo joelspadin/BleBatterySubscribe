@@ -22,14 +22,14 @@ public class BatteryServiceInformation
 
 public class BatteryServiceWatcher
 {
-    private static readonly Guid BatteryServiceUuid = new Guid("0000180F-0000-1000-8000-00805F9B34FB");
+
 
     private DeviceWatcher _watcher;
-    private ILogger<Worker> _logger;
+    private ILogger<WindowsBackgroundService> _logger;
 
     public event TypedEventHandler<BatteryServiceWatcher, BatteryServiceInformation>? ServiceAdded;
 
-    public BatteryServiceWatcher(ILogger<Worker> logger)
+    public BatteryServiceWatcher(ILogger<WindowsBackgroundService> logger)
     {
         _logger = logger;
 
@@ -60,7 +60,7 @@ public class BatteryServiceWatcher
             return;
         }
 
-        var result = await device.GetGattServicesForUuidAsync(BatteryServiceUuid);
+        var result = await device.GetGattServicesForUuidAsync(GattServiceUuids.Battery);
         if (result == null)
         {
             _logger.LogDebug($"No battery service on BLE device {info.Name}");
