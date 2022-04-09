@@ -1,23 +1,35 @@
 # Window BLE Battery Service Subscriber
 
-This implements a Windows service which fixes Windows to correctly update the battery level for some Bluetooth devices. It watches for connected BLE devices and subscribes to the battery level characteristic of their GATT battery services, if provided.
+This project implements a Windows service which fixes Windows to correctly update the battery level for some Bluetooth devices. If the battery levels in **Settings > Devices > Bluetooth & other devices** don't seem to update properly, installing this service may help.
+
+For some reason, Windows doesn't ask BLE devices to notify it when their battery levels change. This service fixes that by watching for connected BLE devices, checking if they have a GATT battery service, and if so registering for notifications for the battery level characteristic.
 
 ## Installation
 
+This service requires the [.NET Desktop Runtime 5.0](https://dotnet.microsoft.com/en-us/download/dotnet/5.0). Find the ".NET Desktop Runtime" section on that page and click the "x64" link in the table, then run the installer it downloads.
+
 Download the the .msix file from the [latest release](https://github.com/joelspadin/BleBatterySubscribe/releases) and double click it to install the service.
+
+To verify that the service is running, open "Services" from the start menu or press **Windows Key + R**, type `services.msc`, and press OK. Check that there is a row for "BLE Battery Service Subscriber" and it shows "Running" for its status.
 
 ## Development
 
 ### Requirements
 
-* [.NET 5.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
+* [.NET SDK 5.0 or newer](https://dotnet.microsoft.com/en-us/download/dotnet)
+* [.NET Desktop Runtime 5.0](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
 * [PowerShell](https://aka.ms/powershell-release?tag=stable)
 
 ### Testing
 
-To debug the service, open this folder in Visual Studio Code and run the ".NET Core Launch (console)" launch configuration.
+To run the program as a console application, open the project folder in a terminal and run
+```ps
+dotnet run
+```
 
-To install the application in development mode, open a PowerShell window as administrator and run
+To run the program in Visual Studio Code's debugger, use the ".NET Core Launch (console)" launch configuration.
+
+To install the Windows service in development mode, first open **Settings > Update & Security > For developers** and enable the **Developer Mode** switch. Then, open the project folder in a PowerShell window as administrator and run
 
 ```ps
 # Builds and deploys a release build
