@@ -12,10 +12,14 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
+            .UseWindowsService(options =>
+            {
+                options.ServiceName = "BLE Battery Service Subscriber";
+            })
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<BatteryServiceWatcher>();
-                services.AddHostedService<Worker>();
+                services.AddHostedService<WindowsBackgroundService>();
             });
 }
 

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-public class Worker : BackgroundService
+public class WindowsBackgroundService : BackgroundService
 {
     private readonly BatteryServiceWatcher _watcher;
-    private readonly ILogger<Worker> _logger;
+    private readonly ILogger<WindowsBackgroundService> _logger;
 
-    public Worker(BatteryServiceWatcher watcher, ILogger<Worker> logger)
+    public WindowsBackgroundService(BatteryServiceWatcher watcher, ILogger<WindowsBackgroundService> logger)
     {
         _watcher = watcher;
         _logger = logger;
@@ -24,11 +24,11 @@ public class Worker : BackgroundService
             {
                 if (await ServiceHelper.WriteNotify(characteristic))
                 {
-                    _logger.LogInformation($"Subscribed to {info.Device.Name}");
+                    _logger.LogInformation($"Subscribed to battery service notifications for {info.Device.Name}");
                 }
                 else
                 {
-                    _logger.LogWarning($"Failed to subscribe to {info.Device.Name}");
+                    _logger.LogWarning($"Failed to subscribe to battery service notifications for {info.Device.Name}");
                 }
             }
         };

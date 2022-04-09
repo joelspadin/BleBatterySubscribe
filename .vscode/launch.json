@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net5.0-windows10.0.17763.0/win-x64/BleBatterySubscribe.exe",
+            "program": "${workspaceFolder}/bin/Debug/net5.0-windows10.0.19041.0/win-x64/BleBatterySubscribe.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
