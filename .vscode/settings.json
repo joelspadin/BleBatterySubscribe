@@ -1,5 +1,11 @@
 {
     "[csharp]": {
         "editor.formatOnSave": true,
-    }
+    },
+    "[xml]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "xml.format.enforceQuoteStyle": "preferred",
+    "xml.format.preserveAttributeLineBreaks": true
 }

@@ -1,0 +1,11 @@
+<PackagingLayout xmlns="http://schemas.microsoft.com/appx/makeappx/2017">
+    <PackageFamily ID="BleBatterySubscribe" FlatBundle="true" ManifestPath="appxmanifest.xml" ResourceManager="false">
+
+        <Package ID="BleBatterySubscribe-x64" ProcessorArchitecture="x64">
+            <Files>
+                <File DestinationPath="*" SourcePath="../bin/Release/net5.0-windows10.0.19041.0/win-x64/publish/*" />
+                <File DestinationPath="images/*" SourcePath="images/*" />
+            </Files>
+        </Package>
+    </PackageFamily>
+</PackagingLayout>

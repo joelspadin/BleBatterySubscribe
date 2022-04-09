@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+    xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
+    xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+    xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+    xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
+
+    <Identity Name="JoelSpadin.BleBatterySubscribe"
+        Version="1.0.0.1"
+        Publisher="CN=Joel Spadin, C=US"
+        ProcessorArchitecture="x64" />
+
+    <Properties>
+        <DisplayName>BLE Battery Service Subscriber</DisplayName>
+        <PublisherDisplayName>Joel Spadin</PublisherDisplayName>
+        <Description>Background service which fixes Windows to correctly update the battery level for some Bluetooth devices.</Description>
+        <Logo>images/logo.png</Logo>
+    </Properties>
+    <Resources>
+        <Resource Language="en-us" />
+    </Resources>
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.19044.0" />
+    </Dependencies>
+    <Capabilities>
+        <rescap:Capability Name="runFullTrust" />
+        <rescap:Capability Name="packagedServices" />
+    </Capabilities>
+
+    <Applications>
+        <Application Id="BleBatterySubscribe" Executable="BleBatterySubscribe.exe" EntryPoint="Windows.FullTrustApplication">
+            <uap:VisualElements DisplayName="BLE Battery Service Subscriber"
+                Description="Fixes Windows to correctly update the battery level for some Bluetooth devices"
+                Square150x150Logo="images/logo-150.png"
+                Square44x44Logo="images/logo-44.png"
+                BackgroundColor="#000000" />
+            <Extensions>
+                <desktop6:Extension Category="windows.service" Executable="BleBatterySubscribe.exe" EntryPoint="Windows.FullTrustApplication">
+                    <desktop6:Service Name="BLE Battery Service Subscriber" StartupType="auto" StartAccount="localService" />
+                </desktop6:Extension>
+            </Extensions>
+        </Application>
+    </Applications>
+</Package>

@@ -1,0 +1,2 @@
+signtool sign /debug /a /fd SHA256 /f BleBatterySubscribe_TemporaryKey.pfx /p 12345 bin\BleBatterySubscribe-x64.msix
+signtool sign /debug /a /fd SHA256 /f BleBatterySubscribe_TemporaryKey.pfx /p 12345 bin\BleBatterySubscribe.msixbundle
