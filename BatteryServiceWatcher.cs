@@ -22,8 +22,6 @@ public class BatteryServiceInformation
 
 public class BatteryServiceWatcher
 {
-
-
     private DeviceWatcher _watcher;
     private ILogger<WindowsBackgroundService> _logger;
 
@@ -53,25 +51,32 @@ public class BatteryServiceWatcher
 
     private async void DeviceAdded(DeviceWatcher sender, DeviceInformation info)
     {
-        var device = await BluetoothLEDevice.FromIdAsync(info.Id);
-        if (device == null)
+        try
         {
-            _logger.LogWarning($"Failed to get BLE device {info.Name} ({info.Id})");
-            return;
+            using var device = await BluetoothLEDevice.FromIdAsync(info.Id);
+            if (device == null)
+            {
+                _logger.LogWarning($"Failed to get BLE device {info.Name} ({info.Id})");
+                return;
+            }
+
+            var result = await device.GetGattServicesForUuidAsync(GattServiceUuids.Battery);
+            if (result == null)
+            {
+                _logger.LogDebug($"No battery service on BLE device {info.Name}");
+                return;
+            }
+
+            _logger.LogDebug($"New BLE device {info.Name}");
+
+            foreach (var service in result.Services) using (service)
+            {
+                OnServiceAdded(new BatteryServiceInformation(device, service));
+            }
         }
-
-        var result = await device.GetGattServicesForUuidAsync(GattServiceUuids.Battery);
-        if (result == null)
+        catch (ArgumentException ex)
         {
-            _logger.LogDebug($"No battery service on BLE device {info.Name}");
-            return;
-        }
-
-        _logger.LogDebug($"New BLE device {info.Name}");
-
-        foreach (var service in result.Services)
-        {
-            OnServiceAdded(new BatteryServiceInformation(device, service));
+            _logger.LogDebug(ex, $"Failed to get device {info.Name}");
         }
     }
 
