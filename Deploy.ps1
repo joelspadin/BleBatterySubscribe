@@ -24,4 +24,8 @@ if ($PSVersionTable.PSVersion.Major -ge 7) {
     Import-Module Appx -UseWindowsPowerShell
 }
 
+Get-AppxPackage -Name "*JoelSpadin.BleBatterySubscribe*" | foreach-object {
+    Remove-AppxPackage $_.PackageFullName
+}
+
 Add-AppxPackage -Register "$PSScriptRoot/bin/appxmanifest.xml"
