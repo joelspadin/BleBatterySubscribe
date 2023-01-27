@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-    xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
+    xmlns:desktop7="http://schemas.microsoft.com/appx/manifest/desktop/windows10/7"
     xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-    xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
     xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
 
     <Identity Name="JoelSpadin.BleBatterySubscribe"
-        Version="1.0.0.1"
+        Version="1.1.0.0"
         Publisher="CN=Joel Spadin, C=US"
         ProcessorArchitecture="x64" />
 
@@ -35,9 +34,9 @@
                 Square44x44Logo="images/logo-44.png"
                 BackgroundColor="#000000" />
             <Extensions>
-                <desktop6:Extension Category="windows.service" Executable="BleBatterySubscribe.exe" EntryPoint="Windows.FullTrustApplication">
-                    <desktop6:Service Name="BLE Battery Service Subscriber" StartupType="auto" StartAccount="localService" />
-                </desktop6:Extension>
+                <desktop7:Extension Category="windows.service" Executable="BleBatterySubscribe.exe" EntryPoint="Windows.FullTrustApplication">
+                    <desktop7:Service Name="BLE Battery Service Subscriber" StartupType="delayedStart" StartAccount="localService" />
+                </desktop7:Extension>
             </Extensions>
         </Application>
     </Applications>
