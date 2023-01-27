@@ -9,7 +9,7 @@ $configuration = if ($debug) { "Debug" } else { "Release" }
 dotnet publish -c $configuration
 
 (Get-Content "$PSScriptRoot/installer/appxmanifest.xml") `
-    -replace "BleBatterySubscribe.exe", "bin/$configuration/net5.0-windows10.0.19041.0/publish/BleBatterySubscribe.exe" `
+    -replace "BleBatterySubscribe.exe", "$configuration/net7.0-windows10.0.19041.0/win-x64/publish/BleBatterySubscribe.exe" `
 | Out-File -Encoding utf8 "bin/appxmanifest.xml"
 
 # Stop the service if it's already running
